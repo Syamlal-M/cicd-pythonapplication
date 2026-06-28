@@ -10,7 +10,7 @@ pipeline {
 
      stage('Checkout'){
            steps {
-                url: '/home/shyamlal/repositories/cicd-pythonapp/',
+                url: '/home/shyamlal/repositories/cicd-pythonapp/'
                 branch: 'master'
            }
         }
