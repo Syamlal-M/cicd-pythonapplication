@@ -21,5 +21,22 @@ pipeline {
        sh 'cat /etc/os-release'
       }
     }
+ stage('Build Docker'){
+            steps{
+                script{
+                    sh '''
+                    echo 'Buid Docker Image'
+                    docker build -t python/cicd:${BUILD_NUMBER} .
+}
+}
+}
+
+stage('imagename') {
+      steps {
+       sh 'docker image ls'
+      
+      }
+    }
+
 }
 }
