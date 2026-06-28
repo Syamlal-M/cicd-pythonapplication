@@ -11,7 +11,7 @@ pipeline {
      stage('Checkout'){
            steps {
            git branch: 'master',
-           url: '/home/shyamlal/repositories/cicd-pythonapp/'           
+           url: 'https://github.com/Syamlal-M/cicd-pythonapplication'           
 }
         }
 
