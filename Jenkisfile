@@ -30,13 +30,5 @@ pipeline {
 }
 }
 }
-
-stage('imagename') {
-      steps {
-       sh 'docker image ls'
-      
-      }
-    }
-
 }
 }
