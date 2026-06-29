@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     environment {
@@ -24,10 +23,24 @@ pipeline {
 
         stage('Build Docker') {
             steps {
-                script {
+                sh '''
+                    echo "Build Docker Image"
+                    docker build -t python/cicd:${BUILD_NUMBER} .
+                '''
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
                     sh '''
-                        echo "Build Docker Image"
-                        docker build -t python/cicd:${BUILD_NUMBER} .
+                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                        docker push python/cicd:${BUILD_NUMBER}
+                        docker logout
                     '''
                 }
             }
