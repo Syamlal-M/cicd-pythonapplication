@@ -61,7 +61,7 @@ stage('Update K8S manifest') {
                 git add deploy/deploy.yaml
                 git commit -m "Update deploy.yaml | build ${BUILD_NUMBER}" || echo "No changes"
 
-                git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/your-repo.git HEAD:master
+                git push origin master
             '''
         }
     }
