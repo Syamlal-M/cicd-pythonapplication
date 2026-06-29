@@ -48,7 +48,7 @@ pipeline {
 stage('Update K8S manifest') {
     steps {
         withCredentials([usernamePassword(
-            credentialsId: 'github-creds',
+            credentialsId: 'Github-cred',
             usernameVariable: 'GIT_USERNAME',
             passwordVariable: 'GIT_PASSWORD'
         )]) {
