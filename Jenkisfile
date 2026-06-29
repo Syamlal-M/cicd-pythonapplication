@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Build Docker Image"
-                    docker build -t shyam1239/cicd:${BUILD_NUMBER} .
+                    docker build -t shyam1239/cicd:v${BUILD_NUMBER} .
                 '''
             }
         }
@@ -39,7 +39,7 @@ pipeline {
                 )]) {
                     sh '''
                         echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                        docker push shyam1239/cicd:${BUILD_NUMBER}
+                        docker push shyam1239/cicd:v${BUILD_NUMBER}
                         docker logout
                     '''
                 }
@@ -59,7 +59,7 @@ stage('Update K8S manifest') {
             
                sed -i "s|image: .*|image: shyam1239/cicd:v${BUILD_NUMBER}|g" deploy/deploy.yaml
                git add deploy/deploy.yaml
-               git commit -m "Update deploy.yaml | build ${BUILD_NUMBER}" || echo "No changes"
+               git commit -m "Update deploy.yaml | build v${BUILD_NUMBER}" || echo "No changes"
 
                git push origin master
 
