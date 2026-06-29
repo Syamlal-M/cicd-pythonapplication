@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Build Docker Image"
-                    docker build -t python/cicd:${BUILD_NUMBER} .
+                    docker build -t shyam1239/cicd:${BUILD_NUMBER} .
                 '''
             }
         }
@@ -39,7 +39,7 @@ pipeline {
                 )]) {
                     sh '''
                         echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                        docker push python/cicd:${BUILD_NUMBER}
+                        docker push shyam1239/cicd:${BUILD_NUMBER}
                         docker logout
                     '''
                 }
