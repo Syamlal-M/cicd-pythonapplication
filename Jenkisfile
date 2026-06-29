@@ -58,7 +58,7 @@ stage('Update K8S manifest') {
 
                 sed -i "s/32/${BUILD_NUMBER}/g" deploy/deploy.yaml
 
-                git add deploy.yaml
+                git add deploy/deploy.yaml
                 git commit -m "Update deploy.yaml | build ${BUILD_NUMBER}" || echo "No changes"
 
                 git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/your-repo.git HEAD:master
