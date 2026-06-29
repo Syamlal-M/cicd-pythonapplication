@@ -57,8 +57,7 @@ stage('Update K8S manifest') {
                 git config user.name "jenkins"
                 git remote set-url origin git@github.com:Syamlal-M/cicd-pythonapplication.git
 
-                sed -i "s/32/${BUILD_NUMBER}/g" deploy/deploy.yaml
-
+                sed -i "s|image: .*|image: shyam1239/cicd:v${BUILD_NUMBER}|g" deploy/deployment.yaml
                 git add deploy/deploy.yaml
                 git commit -m "Update deploy.yaml | build ${BUILD_NUMBER}" || echo "No changes"
 
