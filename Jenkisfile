@@ -58,7 +58,9 @@ stage('Update K8S manifest') {
                 git remote set-url origin git@github.com:Syamlal-M/cicd-pythonapplication.git
             
                sed -i "s|image: .*|image: shyam1239/cicd:v${BUILD_NUMBER}|g" deploy/deploy.yaml
+               sed -i "s|image: .*|image: shyam1239/cicd:v${BUILD_NUMBER}|g" deploy/pod.yaml
                git add deploy/deploy.yaml
+               git add deploy/pod.yaml
                git commit -m "Update deploy.yaml | build v${BUILD_NUMBER}" || echo "No changes"
 
                git push origin master
