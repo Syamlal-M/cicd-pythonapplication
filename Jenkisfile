@@ -56,8 +56,15 @@ stage('Update K8S manifest') {
                 git config user.email "jenkins@example.com"
                 git config user.name "jenkins"
                 git remote set-url origin git@github.com:Syamlal-M/pythonapplication-manifest.git
-                git clone git@github.com:Syamlal-M/pythonapplication-manifest.git 
-                cd  pythonapplication-manifest
+
+                if [ ! -d pythonapplication-manifest ]; then
+                    git clone git@github.com:Syamlal-M/pythonapplication-manifest.git
+                fi
+
+                cd pythonapplication-manifest
+                git fetch origin
+                git reset --hard origin/main
+
             
                sed -i "s|image: .*|image: shyam1239/cicd:v${BUILD_NUMBER}|g" deploy/deploy.yaml
                sed -i "s|image: .*|image: shyam1239/cicd:v${BUILD_NUMBER}|g" deploy/pod.yaml
